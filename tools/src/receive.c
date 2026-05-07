@@ -1,7 +1,3 @@
-/*
- * Receive a UDP packet from client.c.
- */
-
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <stdio.h>
@@ -12,43 +8,40 @@
 #include <unistd.h>
 
 int main(int argc, char *argv[]) {
-  int sock;
-  socklen_t fromlen;
-  short port;
-  struct sockaddr_in name, from;
-  char buf[1024];
-
   if (argc != 2) {
-    fprintf(stderr, "Usage: server port\n");
+    fprintf(stderr, "Usage: %s port\n", argv[0]);
     exit(1);
   }
-  port = atoi(argv[1]);
 
-  sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+  int sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
   if (sock < 0) {
     perror("socket");
     exit(1);
   }
 
-  memset(&name, 0, sizeof name);
+  struct sockaddr_in name;
   name.sin_family = AF_INET;
   name.sin_addr.s_addr = INADDR_ANY;
-  name.sin_port = ntohs(port);
+  name.sin_port = ntohs(atoi(argv[1]));
+
   if (bind(sock, (struct sockaddr *)&name, sizeof(name)) < 0) {
     perror("bind");
     exit(1);
   }
 
-  fromlen = sizeof(from);
   while (1) {
-    memset(buf, 0, sizeof buf);
-    if (recvfrom(sock, buf, sizeof(buf), 0, (struct sockaddr *)&from,
-                 &fromlen) < 0)
+    char buffer[1024];
+    memset(buffer, 0, sizeof buffer);
+
+    struct sockaddr_in from;
+    socklen_t from_len = sizeof(from);
+    if (recvfrom(sock, buffer, sizeof(buffer), 0, (struct sockaddr *)&from,
+                 &from_len) < 0)
       perror("recvfrom");
-    printf("from %s: %s\n", inet_ntoa(from.sin_addr), buf);
+
+    printf("from %s: %s\n", inet_ntoa(from.sin_addr), buffer);
   }
 
   close(sock);
-
-  exit(0);
+  return 0;
 }
