@@ -58,22 +58,22 @@ on macOS:
 
 The Pico reboots and runs the program.
 
-By default, the Pico registers itself under the hardcoded local IP
-address 192.168.7.1. It listens for UDP packets on port 12345, and
-it sends status packets every second to the hardcoded local IP
-address 192.168.64.47 and port 12345 (because that's the local
-address of my host computer). Adjust these addresses and ports in
-[./src/main.c](./src/main.c) to match your set-up.
+By default, the Pico registers itself under the hardcoded IP address
+192.168.7.1. It echos UDP packets sent to port 12345, and sends
+periodic health updates to the hardcoded IP address 192.168.64.47
+and port 12345 (because that's the local address of my host computer).
+Adjust these addresses and ports in [./src/main.c](./src/main.c) to match your set-up.
 
 Use the tools in the [./tools/](./tools/) folder to talk to the Pico:
 
-    ./tools/build/send 192.168.7.1 12345
+    ./tools/build/echo 192.168.7.1 12345
 
-Sends a message to the Pico and prints the response.
+Sends a message to the Pico and prints the response (echo).
 
-    ./tools/build/receive 12345
+    ./tools/build/health 12345
 
-Prints the status packets that the Pico sends to the host computer.
+Prints the health updates that the Pico sends to the host computer.
+Currently, that's only the Pico's IP address and hostname.
 
 ## Attribution and License
 

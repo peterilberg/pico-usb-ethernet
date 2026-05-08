@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
                  &from_len) < 0)
       perror("recvfrom");
 
-    printf("from %s: %s\n", inet_ntoa(from.sin_addr), buffer);
+    printf("%s: %s\n", inet_ntoa(from.sin_addr), buffer);
   }
 
   close(sock);

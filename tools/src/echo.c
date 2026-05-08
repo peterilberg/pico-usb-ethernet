@@ -8,7 +8,7 @@
 #include <unistd.h>
 
 #define MESSAGE                                                                \
-  "When shall we three meet again In thunder, lightning, or in rain?"
+  "When shall we three meet again in thunder, lightning, or in rain?"
 
 int main(int argc, char *argv[]) {
   if (argc != 3) {
@@ -51,7 +51,7 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
 
-  printf("received: %s", buffer);
+  printf("%s", buffer);
 
   close(sock);
   return 0;
