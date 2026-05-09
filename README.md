@@ -75,12 +75,12 @@ Sends a message to the Pico and prints the response (echo).
 Prints the health updates that the Pico sends to the host computer.
 Currently, that's only the Pico's IP address and hostname.
 
-## Attribution and License
+## Credits and License
 
 This project is derived from Peter Lawrence's example webserver in
 the TinyUSB distribution. A copy is included in the Pico SDK at
 
-[./pico-sdk/lib/tinyusb/examples/device/net_lwip_webserver/src/main.c](./pico-sdk/lib/tinyusb/examples/device/net_lwip_webserver/src/main.c)
+[./pico-sdk/lib/tinyusb/examples/device/net_lwip_webserver/](https://github.com/hathach/tinyusb/tree/86ad6e56c1700e85f1c5678607a762cfe3aa2f47/examples/device/net_lwip_webserver)
 
 A copy of his original copyright notice is reproduced below.
 See the LICENSE file for the licensing information of my project.
